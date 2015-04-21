@@ -156,8 +156,5 @@ set(HDR_HL_DLL
 
 add_library(hldll SHARED ${SRC_HL_DLL} ${HDR_HL_DLL})
 add_definitions( -DWIN32  -D_DEBUG  -D_WINDOWS  -DQUIVER  -DVOXEL  -DQUAKE2  -DVALVE_DLL -DCLIENT_WEAPONS)
-<<<<<<< HEAD
 
 Set(ALL_TARGETS ${ALL_TARGETS} "hldll" PARENT_SCOPE)
-=======
->>>>>>> origin/master

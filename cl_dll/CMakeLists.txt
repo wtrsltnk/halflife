@@ -137,8 +137,5 @@ add_definitions(-DCLIENT_DLL -DCLIENT_WEAPONS -DHL_DLL)
 find_file(SDL2_LIBRARY SDL2.lib ../lib/public)
 find_file(VGUI_LIBRARY vgui.lib ../utils/vgui/lib/win32_vc6)
 target_link_libraries(hl_cdll ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
-<<<<<<< HEAD
 
 Set(ALL_TARGETS ${ALL_TARGETS} "hl_cdll" PARENT_SCOPE)
-=======
->>>>>>> origin/master
