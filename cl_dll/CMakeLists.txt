@@ -1,6 +1,4 @@
 
-include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
-
 set(SRC_HL_CDLL
     ammo.cpp
     ammohistory.cpp
@@ -130,12 +128,14 @@ set(HDR_HL_CDLL
     ../pm_shared/pm_shared.h
 )
 
-add_library(hl_cdll SHARED ${SRC_HL_CDLL} ${HDR_HL_CDLL})
+include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
 
-add_definitions(-DCLIENT_DLL -DCLIENT_WEAPONS -DHL_DLL)
+add_library(rjr_client SHARED ${SRC_HL_CDLL} ${HDR_HL_CDLL})
+
+add_definitions(-DWIN32 -D_DEBUG -D_WINDOWS -DCLIENT_DLL -DCLIENT_WEAPONS -DHL_DLL)
 
 find_file(SDL2_LIBRARY SDL2.lib ../lib/public)
 find_file(VGUI_LIBRARY vgui.lib ../utils/vgui/lib/win32_vc6)
-target_link_libraries(hl_cdll ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
+target_link_libraries(rjr_client ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
 
-Set(ALL_TARGETS ${ALL_TARGETS} "hl_cdll" PARENT_SCOPE)
+Set(ALL_TARGETS ${ALL_TARGETS} "rjr_client" PARENT_SCOPE)

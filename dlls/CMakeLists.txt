@@ -1,6 +1,4 @@
 
-include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
-
 set(SRC_HL_DLL
     aflock.cpp
     agrunt.cpp
@@ -154,7 +152,12 @@ set(HDR_HL_DLL
     ../pm_shared/pm_shared.h
 )
 
-add_library(hldll SHARED ${SRC_HL_DLL} ${HDR_HL_DLL})
-add_definitions( -DWIN32  -D_DEBUG  -D_WINDOWS  -DQUIVER  -DVOXEL  -DQUAKE2  -DVALVE_DLL -DCLIENT_WEAPONS)
+add_library(rjr_server SHARED ${SRC_HL_DLL} ${HDR_HL_DLL})
 
-Set(ALL_TARGETS ${ALL_TARGETS} "hldll" PARENT_SCOPE)
+include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DQUIVER /DVOXEL /DQUAKE2 /DVALVE_DLL /DCLIENT_WEAPONS")
+
+SET_TARGET_PROPERTIES(rjr_server PROPERTIES LINK_FLAGS "/DEF:\"${CMAKE_SOURCE_DIR}/dlls/hl.def\" /NODEFAULTLIB:mfc110d")
+
+set(ALL_TARGETS ${ALL_TARGETS} "rjr_server" PARENT_SCOPE)

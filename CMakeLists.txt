@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
 project(run-jump-retry)
 
@@ -20,15 +20,17 @@ if(DEFINED MOD_FOLDER)
         set(MOD_CDLL_INSTALL_FOLDER "${MOD_FOLDER}\\dlls")
     endif(NOT DEFINED MOD_CDLL_INSTALL_FOLDER)
 
-    get_target_property(HLDLL_LOCATION hldll LOCATION)
-    add_custom_target(Copy_HL_DLL_To_Mod_Directory ALL
-        ${CMAKE_COMMAND} -E copy ${HLDLL_LOCATION} ${MOD_DLL_INSTALL_FOLDER}
+	message(STATUS "Will copy rjr_server to ${MOD_DLL_INSTALL_FOLDER}")
+	add_custom_target(Copy_HL_DLL_To_Mod_Directory ALL
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\rjr_server.dll" ${MOD_DLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\rjr_server.pdb" ${MOD_DLL_INSTALL_FOLDER}
     )
     add_dependencies(Copy_HL_DLL_To_Mod_Directory ${ALL_TARGETS})
 
-    get_target_property(HL_CDLL_LOCATION hl_cdll LOCATION)
-    add_custom_target(Copy_HL_CDLL_To_Mod_Directory ALL
-        ${CMAKE_COMMAND} -E copy ${HL_CDLL_LOCATION} ${MOD_CDLL_INSTALL_FOLDER}
+	message(STATUS "Will copy rjr_client to ${MOD_CDLL_INSTALL_FOLDER}")
+	add_custom_target(Copy_HL_CDLL_To_Mod_Directory ALL
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.dll" ${MOD_CDLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.pdb" ${MOD_CDLL_INSTALL_FOLDER}
     )
     add_dependencies(Copy_HL_CDLL_To_Mod_Directory ${ALL_TARGETS})
 endif(DEFINED MOD_FOLDER)
