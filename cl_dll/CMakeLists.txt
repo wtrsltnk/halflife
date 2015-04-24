@@ -138,4 +138,15 @@ find_file(SDL2_LIBRARY SDL2.lib ../lib/public)
 find_file(VGUI_LIBRARY vgui.lib ../utils/vgui/lib/win32_vc6)
 target_link_libraries(rjr_client ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
 
-Set(ALL_TARGETS ${ALL_TARGETS} "rjr_client" PARENT_SCOPE)
+if(DEFINED MOD_FOLDER)
+    if(NOT DEFINED MOD_CDLL_INSTALL_FOLDER)
+        set(MOD_CDLL_INSTALL_FOLDER "${MOD_FOLDER}\\dlls")
+    endif(NOT DEFINED MOD_CDLL_INSTALL_FOLDER)
+
+    message(STATUS "Will copy rjr_client to ${MOD_CDLL_INSTALL_FOLDER}")
+    add_custom_target(Copy_HL_CDLL_To_Mod_Directory ALL
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.dll" ${MOD_CDLL_INSTALL_FOLDER}
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.pdb" ${MOD_CDLL_INSTALL_FOLDER}
+    )
+    add_dependencies(Copy_HL_CDLL_To_Mod_Directory rjr_client)
+endif(DEFINED MOD_FOLDER)
