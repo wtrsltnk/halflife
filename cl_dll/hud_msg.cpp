@@ -139,3 +139,26 @@ int CHud :: MsgFunc_Concuss( const char *pszName, int iSize, void *pbuf )
 		this->m_StatusIcons.DisableIcon("dmg_concuss");
 	return 1;
 }
+
+int CHud :: MsgFunc_Clock( const char *pszName, int iSize, void *pbuf )
+{
+    int	action;
+
+    BEGIN_READ( pbuf, iSize );
+    action = READ_BYTE();
+    if (action == 1)
+    {
+        printf("Clock started\n");
+        this->m_Flash.m_bClockStarted = true;
+        this->m_Flash.m_bClockFinished = false;
+        this->m_Flash.m_flClockStartTime = READ_COORD();
+    }
+    else if (action == 2 && this->m_Flash.m_bClockStarted)
+    {
+        printf("Clock finisched\n");
+        this->m_Flash.m_bClockFinished = false;
+        this->m_Flash.m_flClockFinishTime = READ_COORD();
+    }
+
+    return 1;
+}

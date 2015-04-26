@@ -555,8 +555,9 @@ public:
 	HSPRITE						m_hsprCursor;
 	float m_flTime;	   // the current client time
 	float m_fOldTime;  // the time at which the HUD was last redrawn
-	double m_flTimeDelta; // the difference between flTime and fOldTime
-	Vector	m_vecOrigin;
+    double m_flTimeDelta; // the difference between flTime and fOldTime
+
+    Vector	m_vecOrigin;
 	Vector	m_vecAngles;
 	int		m_iKeyBits;
 	int		m_iHideHUDDisplay;
@@ -618,7 +619,7 @@ public:
 	int Redraw( float flTime, int intermission );
 	int UpdateClientData( client_data_t *cdata, float time );
 
-	CHud() : m_iSpriteCount(0), m_pHudList(NULL) {}  
+    CHud() : m_iSpriteCount(0), m_pHudList(NULL) {}
 	~CHud();			// destructor, frees allocated memory
 
 	// user messages
@@ -630,6 +631,7 @@ public:
 	void _cdecl MsgFunc_ViewMode( const char *pszName, int iSize, void *pbuf );
 	int _cdecl MsgFunc_SetFOV(const char *pszName,  int iSize, void *pbuf);
 	int  _cdecl MsgFunc_Concuss( const char *pszName, int iSize, void *pbuf );
+    int  _cdecl MsgFunc_Clock( const char *pszName, int iSize, void *pbuf );
 
 	// Screen information
 	SCREENINFO	m_scrinfo;
