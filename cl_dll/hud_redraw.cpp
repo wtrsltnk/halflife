@@ -82,7 +82,7 @@ void CHud::Think(void)
 	if ( m_iFOV == 0 )
 	{  // only let players adjust up in fov,  and only if they are not overriden by something else
 		m_iFOV = max( default_fov->value, 90 );  
-	}
+    }
 	
 	if ( gEngfuncs.IsSpectateOnly() )
 	{
@@ -91,7 +91,7 @@ void CHud::Think(void)
 
 	Bench_CheckStart();
 }
-
+char clock_time[32] = { 0 };
 // Redraw
 // step through the local data,  placing the appropriate graphics & text as appropriate
 // returns 1 if they've changed, 0 otherwise
@@ -196,6 +196,12 @@ int CHud :: Redraw( float flTime, int intermission )
 
 		SPR_DrawAdditive(i, x, y, NULL);
 	}
+
+    if (this->m_bClockStarted)
+    {
+        sprintf(clock_time, "%f", this->m_flTime - this->m_flClockStartTime);
+        DrawHudString(20, 20, 0, clock_time, 100, 100, 100 );
+    }
 
 	/*
 	if ( g_iVisibleMouse )

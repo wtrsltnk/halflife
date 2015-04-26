@@ -149,15 +149,15 @@ int CHud :: MsgFunc_Clock( const char *pszName, int iSize, void *pbuf )
     if (action == 1)
     {
         printf("Clock started\n");
-        this->m_Flash.m_bClockStarted = true;
-        this->m_Flash.m_bClockFinished = false;
-        this->m_Flash.m_flClockStartTime = READ_COORD();
+        this->m_bClockStarted = true;
+        this->m_bClockFinished = false;
+        this->m_flClockStartTime = gHUD.m_flTime;// READ_COORD();`
     }
-    else if (action == 2 && this->m_Flash.m_bClockStarted)
+    else if (action == 2 && this->m_bClockStarted)
     {
         printf("Clock finisched\n");
-        this->m_Flash.m_bClockFinished = false;
-        this->m_Flash.m_flClockFinishTime = READ_COORD();
+        this->m_bClockFinished = false;
+        this->m_flClockFinishTime = gHUD.m_flTime;//READ_COORD();
     }
 
     return 1;

@@ -2008,7 +2008,7 @@ void CTriggerStartClock::StartClockTouch( CBaseEntity *pOther )
 
     MESSAGE_BEGIN( MSG_ALL, gmsgClock );
     WRITE_BYTE( 1 );
-    WRITE_COORD( 1.1234f );
+    WRITE_COORD( gpGlobals->frametime );
     MESSAGE_END();
 
     SetTouch( NULL );

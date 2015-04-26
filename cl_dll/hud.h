@@ -557,6 +557,11 @@ public:
 	float m_fOldTime;  // the time at which the HUD was last redrawn
     double m_flTimeDelta; // the difference between flTime and fOldTime
 
+    bool m_bClockStarted;
+    float m_flClockStartTime;
+    bool m_bClockFinished;
+    float m_flClockFinishTime;
+
     Vector	m_vecOrigin;
 	Vector	m_vecAngles;
 	int		m_iKeyBits;
