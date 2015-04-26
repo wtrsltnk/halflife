@@ -1976,6 +1976,46 @@ void CTriggerSave::SaveTouch( CBaseEntity *pOther )
 	SERVER_COMMAND( "autosave\n" );
 }
 
+
+extern int gmsgClock;
+
+class CTriggerStartClock : public CBaseTrigger
+{
+public:
+    void Spawn( void );
+    void EXPORT StartClockTouch( CBaseEntity *pOther );
+};
+LINK_ENTITY_TO_CLASS( trigger_clock_start, CTriggerStartClock );
+
+void CTriggerStartClock::Spawn( void )
+{
+    if ( g_pGameRules->IsDeathmatch() )
+    {
+        REMOVE_ENTITY( ENT(pev) );
+        return;
+    }
+
+    InitTrigger();
+    SetTouch( &CTriggerStartClock::StartClockTouch );
+}
+
+void CTriggerStartClock::StartClockTouch( CBaseEntity *pOther )
+{
+    if ( !pOther->IsPlayer() )
+        return;
+
+    UTIL_ShowMessageAll( "Clock started" );
+
+    MESSAGE_BEGIN( MSG_ALL, gmsgClock );
+    WRITE_BYTE( 1 );
+    WRITE_COORD( 1.1234f );
+    MESSAGE_END();
+
+    SetTouch( NULL );
+}
+
+
+
 #define SF_ENDSECTION_USEONLY		0x0001
 
 class CTriggerEndSection : public CBaseTrigger
