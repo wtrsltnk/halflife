@@ -199,7 +199,10 @@ int CHud :: Redraw( float flTime, int intermission )
 
     if (this->m_bClockStarted)
     {
-        sprintf(clock_time, "%f", this->m_flTime - this->m_flClockStartTime);
+        if (this->m_bClockFinished == false)
+            sprintf_s(clock_time, "%f", this->m_flTime - this->m_flClockStartTime);
+        else
+            sprintf_s(clock_time, "%f", this->m_flClockFinishTime - this->m_flClockStartTime);
         DrawHudString(20, 20, 0, clock_time, 100, 100, 100 );
     }
 

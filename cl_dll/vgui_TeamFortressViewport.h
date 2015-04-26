@@ -40,6 +40,7 @@
 #define MENU_CLASSHELP2 			7
 #define MENU_REPEATHELP 			8
 #define MENU_SPECHELP				9
+#define MENU_FIRSTMENU              10
 #endif
 using namespace vgui;
 
@@ -57,6 +58,7 @@ class DragNDropPanel;
 class CTransparentPanel;
 class CClassMenuPanel;
 class CTeamMenuPanel;
+class CFirstMenu; // VGUI Tutorial
 class TeamFortressViewport;
 
 char* GetVGUITGAName(const char *pszName);
@@ -512,6 +514,10 @@ private:
 	CMenuPanel*	 ShowTeamMenu( void );
 	void		 CreateClassMenu( void );
 	CMenuPanel*	 ShowClassMenu( void );
+    // Start - VGUI Tutorial
+    void         CreateFirstMenu( void );
+    CMenuPanel*  ShowFirstMenu( void );
+    // End - VGUI Tutorial
 	void		 CreateSpectatorMenu( void );
 	
 	// Scheme handler
@@ -639,6 +645,7 @@ public:
 	int						m_SpectatorCameraMenu;
 	int						m_PlayerMenu; // a list of current player
 	CClassMenuPanel	*m_pClassMenu;
+    CFirstMenu      *m_pFirstMenu; // VGUI Tutorial
 	ScorePanel		*m_pScoreBoard;
 	SpectatorPanel *		m_pSpectatorPanel;
 	char			m_szServerName[ MAX_SERVERNAME_LENGTH ];
@@ -1814,5 +1821,19 @@ public:
 		FillRGBA(x, iYPos + 5, HealthWidth / 10, gHUD.m_iFontHeight, 255, 160, 0, a);
 	}
 };
+
+// Start - VGUI Tutorial
+//================================================================
+// First VGUI menu!
+//============================================================
+class CFirstMenu : public CMenuPanel
+{
+private:
+    CommandButton       *m_pCancelButton;
+
+public:
+    CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int tall);
+};
+// End - VGUI Tutorial
 
 #endif

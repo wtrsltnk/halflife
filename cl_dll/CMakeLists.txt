@@ -52,8 +52,9 @@ set(SRC_HL_CDLL
     vgui_ScorePanel.cpp
     vgui_ServerBrowser.cpp
     vgui_SpectatorPanel.cpp
-    vgui_TeamFortressViewport.cpp
-    vgui_teammenu.cpp
+	vgui_TeamFortressViewport.cpp
+	vgui_teammenu.cpp
+	vgui_firstmenu.cpp
     view.cpp
     voice_status.cpp
     ../common/parsemsg.cpp

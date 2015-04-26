@@ -544,6 +544,7 @@ TeamFortressViewport::TeamFortressViewport(int x,int y,int wide,int tall) : Pane
 	m_iInitialized = false;
 	m_pTeamMenu = NULL;
 	m_pClassMenu = NULL;
+    m_pFirstMenu = NULL; // VGUI Tutorial
 	m_pScoreBoard = NULL;
 	m_pSpectatorPanel = NULL;
 	m_pCurrentMenu = NULL;
@@ -604,6 +605,7 @@ TeamFortressViewport::TeamFortressViewport(int x,int y,int wide,int tall) : Pane
 	// VGUI MENUS
 	CreateTeamMenu();
 	CreateClassMenu();
+    CreateFirstMenu(); // VGUI Tutorial
 	CreateSpectatorMenu();
 	CreateScoreBoard();
 	// Init command menus
@@ -647,6 +649,12 @@ void TeamFortressViewport::Initialize( void )
 	{
 		m_pClassMenu->Initialize();
 	}
+    // Start - VGUI Tutorial
+    if (m_pFirstMenu)
+    {
+        m_pFirstMenu->setVisible( false );
+    }
+    // End - VGUI Tutorial
 	if (m_pScoreBoard)
 	{
 		m_pScoreBoard->Initialize();
@@ -1905,6 +1913,12 @@ void TeamFortressViewport::ShowVGUIMenu( int iMenu )
 		pNewMenu = ShowClassMenu();
 		break;
 
+    // Start - VGUI Tutorial
+    case MENU_FIRSTMENU:
+        pNewMenu = ShowFirstMenu();
+        break;
+    // End - VGUI Tutorial
+
 	default:
 		break;
 	}
@@ -2025,6 +2039,30 @@ void TeamFortressViewport::CreateClassMenu()
 	m_pClassMenu->setParent(this);
 	m_pClassMenu->setVisible( false );
 }
+
+// Start - VGUI Tutorial
+//======================================================================================
+// OUR FIRST MENU
+//======================================================================================
+// Show the FirstMenu
+CMenuPanel* TeamFortressViewport::ShowFirstMenu()
+{
+    // Don't open menus in demo playback
+    if ( gEngfuncs.pDemoAPI->IsPlayingback() )
+        return NULL;
+
+    m_pFirstMenu->Reset();
+    return m_pFirstMenu;
+}
+
+void TeamFortressViewport::CreateFirstMenu()
+{
+    // Create the panel
+    m_pFirstMenu = new CFirstMenu(100, false, 0, 0, ScreenWidth, ScreenHeight);
+    m_pFirstMenu->setParent(this);
+    m_pFirstMenu->setVisible( false );
+}
+// End - VGUI Tutorial
 
 //======================================================================================
 //======================================================================================
