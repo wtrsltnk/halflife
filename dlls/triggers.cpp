@@ -1979,15 +1979,15 @@ void CTriggerSave::SaveTouch( CBaseEntity *pOther )
 
 extern int gmsgClock;
 
-class CTriggerStartClock : public CBaseTrigger
+class CTriggerClockStart : public CBaseTrigger
 {
 public:
     void Spawn( void );
     void EXPORT StartClockTouch( CBaseEntity *pOther );
 };
-LINK_ENTITY_TO_CLASS( trigger_clock_start, CTriggerStartClock );
+LINK_ENTITY_TO_CLASS( trigger_clock_start, CTriggerClockStart );
 
-void CTriggerStartClock::Spawn( void )
+void CTriggerClockStart::Spawn( void )
 {
     if ( g_pGameRules->IsDeathmatch() )
     {
@@ -1996,10 +1996,10 @@ void CTriggerStartClock::Spawn( void )
     }
 
     InitTrigger();
-    SetTouch( &CTriggerStartClock::StartClockTouch );
+    SetTouch( &CTriggerClockStart::StartClockTouch );
 }
 
-void CTriggerStartClock::StartClockTouch( CBaseEntity *pOther )
+void CTriggerClockStart::StartClockTouch( CBaseEntity *pOther )
 {
     if ( !pOther->IsPlayer() )
         return;
@@ -2008,6 +2008,43 @@ void CTriggerStartClock::StartClockTouch( CBaseEntity *pOther )
 
     MESSAGE_BEGIN( MSG_ALL, gmsgClock );
     WRITE_BYTE( 1 );
+    WRITE_COORD( gpGlobals->frametime );
+    MESSAGE_END();
+
+    SetTouch( NULL );
+}
+
+
+
+class CTriggerClockFinish : public CBaseTrigger
+{
+public:
+    void Spawn( void );
+    void EXPORT FinishClockTouch( CBaseEntity *pOther );
+};
+LINK_ENTITY_TO_CLASS( trigger_clock_finish, CTriggerClockFinish );
+
+void CTriggerClockFinish::Spawn( void )
+{
+    if ( g_pGameRules->IsDeathmatch() )
+    {
+        REMOVE_ENTITY( ENT(pev) );
+        return;
+    }
+
+    InitTrigger();
+    SetTouch( &CTriggerClockFinish::FinishClockTouch );
+}
+
+void CTriggerClockFinish::FinishClockTouch( CBaseEntity *pOther )
+{
+    if ( !pOther->IsPlayer() )
+        return;
+
+    UTIL_ShowMessageAll( "Clock finished" );
+
+    MESSAGE_BEGIN( MSG_ALL, gmsgClock );
+    WRITE_BYTE( 2 );
     WRITE_COORD( gpGlobals->frametime );
     MESSAGE_END();
 

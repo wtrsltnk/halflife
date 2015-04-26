@@ -2240,6 +2240,10 @@
 [
 ]
 
+@SolidClass base(Targetname) = trigger_clock_finish : "Finish Clock Trigger"
+[
+]
+
 @PointClass base(Targetx, Targetname) = trigger_camera : "Trigger Camera" 
 [
 	wait(integer) : "Hold time" : 10
