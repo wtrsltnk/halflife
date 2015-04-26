@@ -152,23 +152,23 @@ set(HDR_HL_DLL
     ../pm_shared/pm_shared.h
 )
 
-add_library(rjr_server SHARED ${SRC_HL_DLL} ${HDR_HL_DLL})
+add_library(game SHARED ${SRC_HL_DLL} ${HDR_HL_DLL})
 
 include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DQUIVER /DVOXEL /DQUAKE2 /DVALVE_DLL /DCLIENT_WEAPONS")
 
-SET_TARGET_PROPERTIES(rjr_server PROPERTIES LINK_FLAGS "/DEF:\"${CMAKE_SOURCE_DIR}/dlls/hl.def\" /NODEFAULTLIB:mfc110d")
+SET_TARGET_PROPERTIES(game PROPERTIES LINK_FLAGS "/DEF:\"${CMAKE_SOURCE_DIR}/dlls/hl.def\" /NODEFAULTLIB:mfc110d")
 
 if(DEFINED MOD_FOLDER)
     if(NOT DEFINED MOD_DLL_INSTALL_FOLDER)
         set(MOD_DLL_INSTALL_FOLDER "${MOD_FOLDER}\\dlls")
     endif(NOT DEFINED MOD_DLL_INSTALL_FOLDER)
 
-    message(STATUS "Will copy rjr_server to ${MOD_DLL_INSTALL_FOLDER}")
+	message(STATUS "Will copy game to ${MOD_DLL_INSTALL_FOLDER}")
     add_custom_target(Copy_HL_DLL_To_Mod_Directory ALL
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\rjr_server.dll" ${MOD_DLL_INSTALL_FOLDER}
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\rjr_server.pdb" ${MOD_DLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\game.dll" ${MOD_DLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\dlls\\game.pdb" ${MOD_DLL_INSTALL_FOLDER}
     )
-    add_dependencies(Copy_HL_DLL_To_Mod_Directory rjr_server)
+	add_dependencies(Copy_HL_DLL_To_Mod_Directory game)
 endif(DEFINED MOD_FOLDER)

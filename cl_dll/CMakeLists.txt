@@ -130,23 +130,23 @@ set(HDR_HL_CDLL
 
 include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
 
-add_library(rjr_client SHARED ${SRC_HL_CDLL} ${HDR_HL_CDLL})
+add_library(client SHARED ${SRC_HL_CDLL} ${HDR_HL_CDLL})
 
 add_definitions(-DWIN32 -D_DEBUG -D_WINDOWS -DCLIENT_DLL -DCLIENT_WEAPONS -DHL_DLL)
 
 find_file(SDL2_LIBRARY SDL2.lib ../lib/public)
 find_file(VGUI_LIBRARY vgui.lib ../utils/vgui/lib/win32_vc6)
-target_link_libraries(rjr_client ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
+target_link_libraries(client ${SDL2_LIBRARY} ${VGUI_LIBRARY} wsock32)
 
 if(DEFINED MOD_FOLDER)
     if(NOT DEFINED MOD_CDLL_INSTALL_FOLDER)
-        set(MOD_CDLL_INSTALL_FOLDER "${MOD_FOLDER}\\dlls")
+		set(MOD_CDLL_INSTALL_FOLDER "${MOD_FOLDER}\\cl_dlls")
     endif(NOT DEFINED MOD_CDLL_INSTALL_FOLDER)
 
-    message(STATUS "Will copy rjr_client to ${MOD_CDLL_INSTALL_FOLDER}")
+	message(STATUS "Will copy client to ${MOD_CDLL_INSTALL_FOLDER}")
     add_custom_target(Copy_HL_CDLL_To_Mod_Directory ALL
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.dll" ${MOD_CDLL_INSTALL_FOLDER}
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\rjr_client.pdb" ${MOD_CDLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\client.dll" ${MOD_CDLL_INSTALL_FOLDER}
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}\\cl_dll\\client.pdb" ${MOD_CDLL_INSTALL_FOLDER}
     )
-    add_dependencies(Copy_HL_CDLL_To_Mod_Directory rjr_client)
+	add_dependencies(Copy_HL_CDLL_To_Mod_Directory client)
 endif(DEFINED MOD_FOLDER)
