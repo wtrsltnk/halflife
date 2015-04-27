@@ -151,16 +151,14 @@ int CHud :: MsgFunc_Clock( const char *pszName, int iSize, void *pbuf )
     action = READ_BYTE();
     if (action == 1 && this->m_bClockStarted == false)
     {
-        printf("Clock started\n");
         this->m_bClockStarted = true;
         this->m_bClockFinished = false;
-        this->m_flClockStartTime = gHUD.m_flTime;// READ_COORD();`
+        this->m_flClockStartTime = gHUD.m_flTime;
     }
     else if (action == 2 && this->m_bClockStarted && this->m_bClockFinished == false)
     {
-        printf("Clock finisched\n");
         this->m_bClockFinished = true;
-        this->m_flClockFinishTime = gHUD.m_flTime;//READ_COORD();
+        this->m_flClockFinishTime = gHUD.m_flTime;
         gViewPort->ShowVGUIMenu(MENU_FIRSTMENU);
     }
 
