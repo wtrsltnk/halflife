@@ -1829,11 +1829,32 @@ public:
 class CFirstMenu : public CMenuPanel
 {
 private:
-    CommandButton       *m_pCancelButton;
+    CommandButton       *m_pRetryButton;
+    CommandButton       *m_pNextRunButton;
 
 public:
     CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int tall);
 };
 // End - VGUI Tutorial
+
+
+class CMenuHandler_UseEntity : public ActionSignal
+{
+private:
+    char	m_target[MAX_COMMAND_SIZE];
+
+public:
+    CMenuHandler_UseEntity( char * target )
+    {
+        strncpy( m_target, target, MAX_COMMAND_SIZE);
+    }
+
+    virtual void actionPerformed(Panel* panel)
+    {
+//        CBaseEntity* entity = FIND_ENTITY_BY_STRING(NULL, "targetname", this->m_target);
+    }
+
+
+};
 
 #endif

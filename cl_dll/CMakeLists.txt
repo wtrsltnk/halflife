@@ -126,7 +126,7 @@ set(HDR_HL_CDLL
     ../pm_shared/pm_info.h
     ../pm_shared/pm_materials.h
     ../pm_shared/pm_movevars.h
-    ../pm_shared/pm_shared.h
+	../pm_shared/pm_shared.h
 )
 
 include_directories(../dlls ../cl_dll ../public ../common ../pm_shared ../engine ../utils/vgui/include ../game_shared ../external)
