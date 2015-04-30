@@ -107,7 +107,7 @@ set(HDR_HL_CDLL
     kbutton.h
     StudioModelRenderer.h
     tri.h
-    util_vector.h
+    ../common/vector.h
     vgui_ControlConfigPanel.h
     vgui_int.h
     vgui_SchemeManager.h

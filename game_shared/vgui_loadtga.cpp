@@ -10,6 +10,7 @@
 #include "VGUI.h"
 #include "vgui_loadtga.h"
 #include "VGUI_InputStream.h"
+#include <stdio.h>
 
 
 // ---------------------------------------------------------------------- //

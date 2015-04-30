@@ -141,7 +141,7 @@ set(HDR_HL_DLL
     teamplay_gamerules.h
     trains.h
     util.h
-    vector.h
+    ../common/vector.h
     weapons.h
     ../engine/eiface.h
     ../pm_shared/pm_debug.h
