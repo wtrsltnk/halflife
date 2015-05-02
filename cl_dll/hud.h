@@ -561,6 +561,7 @@ public:
     float m_flClockStartTime;
     bool m_bClockFinished;
     float m_flClockFinishTime;
+    char m_flFinalTime[32];
 
     Vector	m_vecOrigin;
 	Vector	m_vecAngles;

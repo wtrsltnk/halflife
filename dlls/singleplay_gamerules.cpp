@@ -26,6 +26,8 @@
 
 extern DLL_GLOBAL CGameRules	*g_pGameRules;
 extern DLL_GLOBAL BOOL	g_fGameOver;
+extern DLL_GLOBAL float	g_TimerStart;
+extern DLL_GLOBAL float	g_TimerFinish;
 extern int gmsgDeathMsg;	// client dll messages
 extern int gmsgScoreInfo;
 extern int gmsgMOTD;
@@ -34,7 +36,9 @@ extern int gmsgMOTD;
 //=========================================================
 CHalfLifeRules::CHalfLifeRules( void )
 {
-	RefreshSkillData();
+    RefreshSkillData();
+    g_TimerStart = -1;
+    g_TimerFinish = -1;
 }
 
 //=========================================================

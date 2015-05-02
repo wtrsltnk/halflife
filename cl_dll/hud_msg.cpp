@@ -60,6 +60,12 @@ int CHud :: MsgFunc_ResetHUD(const char *pszName, int iSize, void *pbuf )
 	// reset concussion effect
 	m_iConcussionEffect = 0;
 
+    // Reset the timer
+    this->m_bClockStarted = false;
+    this->m_bClockFinished = false;
+    this->m_flClockStartTime = -1;
+    this->m_flClockFinishTime = -1;
+
 	return 1;
 }
 
@@ -149,17 +155,21 @@ int CHud :: MsgFunc_Clock( const char *pszName, int iSize, void *pbuf )
 
     BEGIN_READ( pbuf, iSize );
     action = READ_BYTE();
+
     if (action == 1 && this->m_bClockStarted == false)
     {
         this->m_bClockStarted = true;
         this->m_bClockFinished = false;
-        this->m_flClockStartTime = gHUD.m_flTime;
+        this->m_flClockStartTime = this->m_flTime;
     }
     else if (action == 2 && this->m_bClockStarted && this->m_bClockFinished == false)
     {
-        this->m_bClockFinished = true;
-        this->m_flClockFinishTime = gHUD.m_flTime;
+        this->m_bClockStarted = false;
+        this->m_bClockFinished = false;
+        this->m_flClockFinishTime = this->m_flTime;
+        strcpy(this->m_flFinalTime, READ_STRING());
         gViewPort->ShowVGUIMenu(MENU_FIRSTMENU);
+        gEngfuncs.pfnClientCmd("pause");
     }
 
     return 1;

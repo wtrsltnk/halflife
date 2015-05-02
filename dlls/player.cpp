@@ -234,7 +234,7 @@ void LinkUserMessages( void )
 	gmsgFade = REG_USER_MSG("ScreenFade", sizeof(ScreenFade));
 	gmsgAmmoX = REG_USER_MSG("AmmoX", 2);
 	gmsgTeamNames = REG_USER_MSG( "TeamNames", -1 );
-    gmsgClock = REG_USER_MSG("Clock",3);
+    gmsgClock = REG_USER_MSG( "Clock", -1 );
     gmsgVGUIMenu = REG_USER_MSG("VGUIMenu", 1); // VGUI Tutorial
 
 	gmsgStatusText = REG_USER_MSG("StatusText", -1);

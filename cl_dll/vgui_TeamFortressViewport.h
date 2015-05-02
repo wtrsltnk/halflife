@@ -516,7 +516,7 @@ private:
 	CMenuPanel*	 ShowClassMenu( void );
     // Start - VGUI Tutorial
     void         CreateFirstMenu( void );
-    CMenuPanel*  ShowFirstMenu( void );
+    CMenuPanel*  ShowFirstMenu( const char* finaltime );
     // End - VGUI Tutorial
 	void		 CreateSpectatorMenu( void );
 	
@@ -1831,9 +1831,12 @@ class CFirstMenu : public CMenuPanel
 private:
     CommandButton       *m_pRetryButton;
     CommandButton       *m_pNextRunButton;
+    Label               *m_pFinalTime;
 
 public:
     CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int tall);
+
+    void SetFinalTime(const char* finaltime);
 };
 // End - VGUI Tutorial
 

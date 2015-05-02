@@ -1978,6 +1978,8 @@ void CTriggerSave::SaveTouch( CBaseEntity *pOther )
 
 
 extern int gmsgClock;
+extern DLL_GLOBAL float	g_TimerStart;
+extern DLL_GLOBAL float	g_TimerFinish;
 
 class CTriggerClockStart : public CBaseTrigger
 {
@@ -2004,12 +2006,16 @@ void CTriggerClockStart::StartClockTouch( CBaseEntity *pOther )
     if ( !pOther->IsPlayer() )
         return;
 
-    UTIL_ShowMessageAll( "Clock started" );
+    if (g_TimerStart == -1)
+    {
+        g_TimerStart = gpGlobals->time;
+        g_TimerFinish = -1;
 
-    MESSAGE_BEGIN( MSG_ALL, gmsgClock );
-    WRITE_BYTE( 1 );
-    WRITE_COORD( gpGlobals->frametime );
-    MESSAGE_END();
+        MESSAGE_BEGIN( MSG_ALL, gmsgClock );
+        WRITE_BYTE( 1 );
+        WRITE_STRING( "" );
+        MESSAGE_END();
+    }
 
     SetTouch( NULL );
 }
@@ -2036,17 +2042,27 @@ void CTriggerClockFinish::Spawn( void )
     SetTouch( &CTriggerClockFinish::FinishClockTouch );
 }
 
+char clock_time[32] = { 0 };
 void CTriggerClockFinish::FinishClockTouch( CBaseEntity *pOther )
 {
     if ( !pOther->IsPlayer() )
         return;
 
-    UTIL_ShowMessageAll( "Clock finished" );
+    if (g_TimerFinish == -1)
+    {
+        g_TimerFinish = gpGlobals->time;
 
-    MESSAGE_BEGIN( MSG_ALL, gmsgClock );
-    WRITE_BYTE( 2 );
-    WRITE_COORD( gpGlobals->frametime );
-    MESSAGE_END();
+        float t = g_TimerFinish - g_TimerStart;
+        float sec = floor(t);
+        int mil = ((t - sec) * 100);
+        sprintf_s(clock_time, "%d:%d", int(sec), mil);
+
+        byte* buf = (byte*)&g_TimerFinish;
+        MESSAGE_BEGIN( MSG_ALL, gmsgClock );
+        WRITE_BYTE( 2 );
+        WRITE_STRING(clock_time);
+        MESSAGE_END();
+    }
 
     SetTouch( NULL );
 }

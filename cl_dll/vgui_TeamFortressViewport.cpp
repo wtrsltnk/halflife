@@ -1915,7 +1915,7 @@ void TeamFortressViewport::ShowVGUIMenu( int iMenu )
 
     // Start - VGUI Tutorial
     case MENU_FIRSTMENU:
-        pNewMenu = ShowFirstMenu();
+        pNewMenu = ShowFirstMenu(gHUD.m_flFinalTime);
         break;
     // End - VGUI Tutorial
 
@@ -2045,13 +2045,15 @@ void TeamFortressViewport::CreateClassMenu()
 // OUR FIRST MENU
 //======================================================================================
 // Show the FirstMenu
-CMenuPanel* TeamFortressViewport::ShowFirstMenu()
+CMenuPanel* TeamFortressViewport::ShowFirstMenu(const char* finaltime)
 {
     // Don't open menus in demo playback
     if ( gEngfuncs.pDemoAPI->IsPlayingback() )
         return NULL;
 
     m_pFirstMenu->Reset();
+    m_pFirstMenu->SetFinalTime(finaltime);
+
     return m_pFirstMenu;
 }
 

@@ -200,9 +200,22 @@ int CHud :: Redraw( float flTime, int intermission )
     if (this->m_bClockStarted)
     {
         if (this->m_bClockFinished == false)
-            sprintf_s(clock_time, "%f", this->m_flTime - this->m_flClockStartTime);
+        {
+            float t = 0.0f;
+            if (this->m_bClockFinished == false)
+                t = this->m_flTime - this->m_flClockStartTime;
+            else
+                t = this->m_flClockFinishTime - this->m_flClockStartTime;
+
+            float sec = floor(t);
+            int mil = ((t - sec) * 100);
+            sprintf_s(clock_time, "%d:%d", int(sec), mil);
+        }
         else
-            sprintf_s(clock_time, "%f", this->m_flClockFinishTime - this->m_flClockStartTime);
+        {
+            strcpy(clock_time, this->m_flFinalTime);
+        }
+
         DrawHudString(20, 20, 0, clock_time, 100, 100, 100 );
     }
 

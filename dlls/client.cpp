@@ -593,14 +593,24 @@ void ClientCommand( edict_t *pEntity )
 
 		if ( pPlayer->IsObserver() )
 			pPlayer->Observer_FindNextPlayer( atoi( CMD_ARGV(1) )?true:false );
-	}
-    // Start - VGUI Tutorial
+    }
     else if ( FStrEq(pcmd, "vguimenu" ) )
     {
         if (CMD_ARGC() >= 1)
             GetClassPtr((CBasePlayer *)pev)->ShowVGUIMenu(atoi(CMD_ARGV(1)));
     }
-    // End - VGUI Tutorial
+    else if ( FStrEq(pcmd, "next_run" ) )
+    {
+        UTIL_LogPrintf("Next run!\n");
+        CBaseEntity* change_level = UTIL_FindEntityByTargetname( NULL, "next_run" );
+        if (change_level != NULL)
+        {
+            UTIL_LogPrintf("changing level\n");
+            change_level->Touch( GetClassPtr((CBasePlayer *)pev) );
+        }
+        else
+            UTIL_LogPrintf("next_run named entity not found\n");
+    }
 	else if ( g_pGameRules->ClientCommand( GetClassPtr((CBasePlayer *)pev), pcmd ) )
 	{
 		// MenuSelect returns true only if the command is properly handled,  so don't print a warning
