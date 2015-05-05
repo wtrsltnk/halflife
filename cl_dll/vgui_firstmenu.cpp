@@ -9,12 +9,11 @@ CFirstMenu :: CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int 
     m_pRetryButton->setParent( this );
     m_pRetryButton->addActionSignal( new CMenuHandler_StringCommand("restart") );
 
-    m_pNextRunButton = new CommandButton( gHUD.m_TextMessage.BufferedLocaliseTextString( "Next run" ), wide * 0.33f, tall * 0.75f, XRES(75), YRES(30));
+    m_pNextRunButton = new CommandButton( gHUD.m_TextMessage.BufferedLocaliseTextString( "Next run" ), (wide * 0.33f) - XRES(75), tall * 0.75f, XRES(75), YRES(30));
     m_pNextRunButton->setParent( this );
-    m_pNextRunButton->addActionSignal( new CMenuHandler_StringCommand("unpause") );
     m_pNextRunButton->addActionSignal( new CMenuHandler_StringCommand("next_run") );
 
-    m_pFinalTime = new Label( gHUD.m_TextMessage.BufferedLocaliseTextString( "Retry" ), wide * 0.33f, tall * 0.25f, XRES(75), YRES(30));
+    m_pFinalTime = new Label( gHUD.m_TextMessage.BufferedLocaliseTextString( "Retry" ), wide * 0.45f, tall * 0.45f, XRES(75), YRES(30));
     m_pFinalTime->setParent( this );
 }
 

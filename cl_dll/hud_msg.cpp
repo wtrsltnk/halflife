@@ -169,7 +169,13 @@ int CHud :: MsgFunc_Clock( const char *pszName, int iSize, void *pbuf )
         this->m_flClockFinishTime = this->m_flTime;
         strcpy(this->m_flFinalTime, READ_STRING());
         gViewPort->ShowVGUIMenu(MENU_FIRSTMENU);
-        gEngfuncs.pfnClientCmd("pause");
+        gEngfuncs.pfnClientCmd("-moveup");
+        gEngfuncs.pfnClientCmd("-movedown");
+        gEngfuncs.pfnClientCmd("-left");
+        gEngfuncs.pfnClientCmd("-right");
+        gEngfuncs.pfnClientCmd("-forward");
+        gEngfuncs.pfnClientCmd("-back");
+        gEngfuncs.pfnClientCmd("-jump");
     }
 
     return 1;
