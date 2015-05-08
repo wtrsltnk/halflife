@@ -2060,7 +2060,7 @@ CMenuPanel* TeamFortressViewport::ShowFirstMenu(const char* finaltime)
 void TeamFortressViewport::CreateFirstMenu()
 {
     // Create the panel
-    m_pFirstMenu = new CFirstMenu(100, false, 0, 0, ScreenWidth, ScreenHeight);
+    m_pFirstMenu = new CFinishSummary(100, false, 0, 0, ScreenWidth, ScreenHeight);
     m_pFirstMenu->setParent(this);
     m_pFirstMenu->setVisible( false );
 }

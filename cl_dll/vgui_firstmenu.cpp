@@ -2,7 +2,7 @@
 #include "cl_util.h"
 #include "vgui_TeamFortressViewport.h"
 
-CFirstMenu :: CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int tall)
+CFinishSummary :: CFinishSummary(int iTrans, int iRemoveMe, int x, int y, int wide, int tall)
     : CMenuPanel(iTrans, iRemoveMe, x, y, wide, tall)
 {
     m_pRetryButton = new CommandButton( gHUD.m_TextMessage.BufferedLocaliseTextString( "Retry" ), wide * 0.66f, tall * 0.75f, XRES(75), YRES(30));
@@ -17,7 +17,7 @@ CFirstMenu :: CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int 
     m_pFinalTime->setParent( this );
 }
 
-void CFirstMenu :: SetFinalTime(const char* finaltime)
+void CFinishSummary :: SetFinalTime(const char* finaltime)
 {
     this->m_pFinalTime->setText(finaltime);
 }

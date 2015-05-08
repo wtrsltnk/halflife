@@ -58,7 +58,7 @@ class DragNDropPanel;
 class CTransparentPanel;
 class CClassMenuPanel;
 class CTeamMenuPanel;
-class CFirstMenu; // VGUI Tutorial
+class CFinishSummary; // VGUI Tutorial
 class TeamFortressViewport;
 
 char* GetVGUITGAName(const char *pszName);
@@ -645,7 +645,7 @@ public:
 	int						m_SpectatorCameraMenu;
 	int						m_PlayerMenu; // a list of current player
 	CClassMenuPanel	*m_pClassMenu;
-    CFirstMenu      *m_pFirstMenu; // VGUI Tutorial
+    CFinishSummary      *m_pFirstMenu; // VGUI Tutorial
 	ScorePanel		*m_pScoreBoard;
 	SpectatorPanel *		m_pSpectatorPanel;
 	char			m_szServerName[ MAX_SERVERNAME_LENGTH ];
@@ -1826,7 +1826,7 @@ public:
 //================================================================
 // First VGUI menu!
 //============================================================
-class CFirstMenu : public CMenuPanel
+class CFinishSummary : public CMenuPanel
 {
 private:
     CommandButton       *m_pRetryButton;
@@ -1834,7 +1834,7 @@ private:
     Label               *m_pFinalTime;
 
 public:
-    CFirstMenu(int iTrans, int iRemoveMe, int x, int y, int wide, int tall);
+    CFinishSummary(int iTrans, int iRemoveMe, int x, int y, int wide, int tall);
 
     void SetFinalTime(const char* finaltime);
 };

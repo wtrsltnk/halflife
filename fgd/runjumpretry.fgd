@@ -2242,6 +2242,7 @@
 
 @SolidClass base(Targetname) = trigger_clock_finish : "Finish Clock Trigger"
 [
+	nextrun(string) : "Map name of the next run" 
 ]
 
 @PointClass base(Targetx, Targetname) = trigger_camera : "Trigger Camera" 
